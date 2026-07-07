@@ -1,0 +1,75 @@
+name: Debtladder
+options:
+  bundleIdPrefix: com.shimondeitel.debtladder
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Debtladder:
+    type: application
+    platform: iOS
+    sources:
+      - path: Debtladder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.debtladder
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Debtladder/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  DebtladderTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DebtladderTests
+      - path: Debtladder.storekit
+    dependencies:
+      - target: Debtladder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.debtladder.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  DebtladderUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: DebtladderUITests
+    dependencies:
+      - target: Debtladder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.debtladder.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Debtladder:
+    build:
+      targets:
+        Debtladder: all
+        DebtladderTests: [test]
+        DebtladderUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Debtladder.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Debtladder.storekit
+      targets:
+        - DebtladderTests
+        - DebtladderUITests
+    archive:
+      config: Release
